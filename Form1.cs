@@ -11,13 +11,11 @@ namespace ISP_Manager
         {
             MessageBox.Show("Hello, World!");
             //Close();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Close();
-            MessageBox.Show("Goodbye, World!");
+            Close();
         }
     }
 }

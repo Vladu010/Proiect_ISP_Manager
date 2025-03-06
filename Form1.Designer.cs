@@ -29,25 +29,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             button2 = new Button();
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            panel1 = new Panel();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(697, 210);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(690, 147);
+            button2.Location = new Point(3, 2);
             button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
             button2.Size = new Size(82, 22);
@@ -56,32 +46,45 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // dataGridView1
+            // tableLayoutPanel1
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 22);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(634, 405);
-            dataGridView1.TabIndex = 2;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(button2, 0, 0);
+            tableLayoutPanel1.Location = new Point(2, 4);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new Size(154, 495);
+            tableLayoutPanel1.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(162, 82);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(849, 417);
+            panel1.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(1023, 511);
+            Controls.Add(panel1);
+            Controls.Add(tableLayoutPanel1);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button1;
         private Button button2;
-        private DataGridView dataGridView1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel1;
     }
 }

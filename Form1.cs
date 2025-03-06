@@ -21,6 +21,7 @@ namespace ISP_Manager
             custom.FormBorderStyle = FormBorderStyle.None;
             panel1.Controls.Add(custom);
             custom.Show();
+            //1
         }
 
        

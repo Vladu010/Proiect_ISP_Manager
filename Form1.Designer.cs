@@ -32,7 +32,10 @@
             button2 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // button2
@@ -51,7 +54,8 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(button2, 0, 0);
-            tableLayoutPanel1.Location = new Point(2, 4);
+            tableLayoutPanel1.Controls.Add(button1, 0, 1);
+            tableLayoutPanel1.Location = new Point(3, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 5;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
@@ -64,21 +68,42 @@
             // 
             // panel1
             // 
-            panel1.Location = new Point(162, 82);
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Location = new Point(163, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(849, 417);
+            panel1.Size = new Size(849, 495);
             panel1.TabIndex = 4;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanel1.Controls.Add(tableLayoutPanel1);
+            flowLayoutPanel1.Controls.Add(panel1);
+            flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(1023, 511);
+            flowLayoutPanel1.TabIndex = 5;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(3, 102);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1023, 511);
-            Controls.Add(panel1);
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(flowLayoutPanel1);
             Name = "Form1";
             Text = "Form1";
             tableLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -86,5 +111,7 @@
         private Button button2;
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button button1;
     }
 }

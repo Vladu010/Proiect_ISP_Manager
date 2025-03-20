@@ -7,13 +7,13 @@ namespace ISP_Manager
 {
     public partial class Form1 : Form
     {
-   
+
         public Form1()
         {
-            InitializeComponent();         
+            InitializeComponent();
         }
 
-       
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -24,6 +24,9 @@ namespace ISP_Manager
             //1
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

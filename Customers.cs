@@ -47,5 +47,18 @@ namespace ISP_Manager
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+            Add_Customer add_Customer = new Add_Customer();
+            add_Customer.Show();
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            LoadCustomers();
+        }
     }
 }

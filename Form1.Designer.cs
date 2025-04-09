@@ -29,32 +29,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button2 = new Button();
+            clientsBtn = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
+            empBtn = new Button();
             panel1 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // button2
+            // clientsBtn
             // 
-            button2.Location = new Point(3, 2);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(82, 22);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            clientsBtn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            clientsBtn.Location = new Point(3, 2);
+            clientsBtn.Margin = new Padding(3, 2, 3, 2);
+            clientsBtn.Name = "clientsBtn";
+            clientsBtn.Size = new Size(106, 95);
+            clientsBtn.TabIndex = 1;
+            clientsBtn.Text = "Show Clients";
+            clientsBtn.UseVisualStyleBackColor = true;
+            clientsBtn.Click += Clients_Click;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(button2, 0, 0);
-            tableLayoutPanel1.Controls.Add(button1, 0, 1);
+            tableLayoutPanel1.Controls.Add(empBtn, 0, 1);
+            tableLayoutPanel1.Controls.Add(clientsBtn, 0, 0);
             tableLayoutPanel1.Location = new Point(3, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 5;
@@ -63,13 +64,24 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.Size = new Size(154, 495);
+            tableLayoutPanel1.Size = new Size(112, 495);
             tableLayoutPanel1.TabIndex = 3;
+            // 
+            // empBtn
+            // 
+            empBtn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            empBtn.Location = new Point(3, 102);
+            empBtn.Name = "empBtn";
+            empBtn.Size = new Size(106, 93);
+            empBtn.TabIndex = 2;
+            empBtn.Text = "button1";
+            empBtn.UseVisualStyleBackColor = true;
+            empBtn.Click += empBtn_Click;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Location = new Point(163, 3);
+            panel1.Location = new Point(121, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(849, 495);
             panel1.TabIndex = 4;
@@ -83,16 +95,6 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(1023, 511);
             flowLayoutPanel1.TabIndex = 5;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(3, 102);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Form1
             // 
@@ -108,10 +110,10 @@
         }
 
         #endregion
-        private Button button2;
+        private Button clientsBtn;
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel1;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Button button1;
+        private Button empBtn;
     }
 }

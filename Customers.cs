@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using System;
 using Microsoft.Data.SqlClient; 
 using System.Windows.Forms;
+using System.Xml.Serialization;
+
 namespace ISP_Manager
 {
     public partial class Customers : Form
     {
         private string connectionString = "Server=DESKTOP-E9IP40M\\MSSQLSERVER01;Database=ISP_Management;Integrated Security=True;TrustServerCertificate=True;";
-
+        LoadingData loadingData = new LoadingData();
         private void LoadCustomers()
         {
             try
@@ -59,6 +61,11 @@ namespace ISP_Manager
         private void refreshBtn_Click(object sender, EventArgs e)
         {
             LoadCustomers();
+        }
+
+        private void usageBtn_Click(object sender, EventArgs e)
+        {
+            loadingData.LoadUsage(dataGridView1);
         }
     }
 }

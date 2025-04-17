@@ -45,16 +45,16 @@ namespace ISP_Manager
             LoadCustomers();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    
+
+private void button3_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-
             Add_Customer add_Customer = new Add_Customer();
+            add_Customer.TopLevel = false;
+            add_Customer.FormBorderStyle = FormBorderStyle.None; 
+            add_Customer.Dock = DockStyle.Fill; 
+            panel1.Controls.Clear();
+            panel1.Controls.Add(add_Customer);
             add_Customer.Show();
         }
 
@@ -66,6 +66,38 @@ namespace ISP_Manager
         private void usageBtn_Click(object sender, EventArgs e)
         {
             loadingData.LoadUsage(dataGridView1);
+        }
+
+        private void suspendBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE Customers SET status = 'Suspended' WHERE customer_id = @customer_id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@customer_id", dataGridView1.SelectedRows[0].Cells[0].Value);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Customer suspended successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void paymentBtn_Click(object sender, EventArgs e)
+        {
+            loadingData.LoadPayments(dataGridView1);
+
+        }
+
+        private void billingBtn_Click(object sender, EventArgs e)
+        {
+            loadingData.LoadBilling(dataGridView1);
+
         }
     }
 }

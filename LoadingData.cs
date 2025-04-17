@@ -17,6 +17,11 @@ namespace ISP_Manager
     {
         private string connectionString = "Server=DESKTOP-E9IP40M\\MSSQLSERVER01;Database=ISP_Management;Integrated Security=True;TrustServerCertificate=True;";
 
+        public string ConnectionString
+        {
+            get { return connectionString; }
+            set { connectionString = value; }
+        }
 
         public void LoadCustomers(DataGridView dataGridView1)
         {
@@ -198,5 +203,24 @@ namespace ISP_Manager
             }
         }
 
+        public void LoadPlans(DataGridView dataGridView11)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Plans";
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView11.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
     }
 }

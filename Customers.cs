@@ -41,34 +41,99 @@ namespace ISP_Manager
         }
         public Customers()
         {
+
             InitializeComponent();
             LoadCustomers();
         }
 
-    
+        private void processPayBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a row first.");
+                return;
+            }
 
-private void button3_Click(object sender, EventArgs e)
+
+            int billId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["bill_id"].Value);
+            decimal amountDue = Convert.ToDecimal(dataGridView1.SelectedRows[0].Cells["amount_due"].Value);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+
+                SqlCommand checkCmd = new SqlCommand("SELECT status FROM Billing WHERE bill_id = @bill_id", conn);
+                checkCmd.Parameters.AddWithValue("@bill_id", billId);
+
+                string status = checkCmd.ExecuteScalar()?.ToString();
+
+                if (status == "Paid")
+                {
+                    MessageBox.Show("This bill has already been paid.");
+                    return;
+                }
+
+                SqlCommand payCmd = new SqlCommand("ProcessPayment", conn);
+                payCmd.CommandType = CommandType.StoredProcedure;
+                payCmd.Parameters.AddWithValue("@bill_id", billId);
+                payCmd.Parameters.AddWithValue("@amount_paid", amountDue);
+                payCmd.Parameters.AddWithValue("@payment_method", "Credit Card");
+
+                try
+                {
+                    payCmd.ExecuteNonQuery();
+                    MessageBox.Show("Payment processed successfully!");
+
+                    loadingData.LoadBilling(dataGridView1);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Payment failed: " + ex.Message);
+                }
+            }
+        }
+
+        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.DataSource is DataTable dataTable && dataTable.TableName == "Customers")
+            {
+                return;
+            }
+
+            DataTable customersTable = new DataTable("Customers");
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT customer_id, first_name, last_name, email, phone, address, signup_date, status FROM Customers";
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    adapter.Fill(customersTable);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading customers: " + ex.Message);
+                    return;
+                }
+            }
+
+            dataGridView1.DataSource = customersTable;
+        }
+
+        private void addCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Add_Customer add_Customer = new Add_Customer();
             add_Customer.TopLevel = false;
-            add_Customer.FormBorderStyle = FormBorderStyle.None; 
-            add_Customer.Dock = DockStyle.Fill; 
+            add_Customer.FormBorderStyle = FormBorderStyle.None;
+            add_Customer.Dock = DockStyle.Fill;
             panel1.Controls.Clear();
             panel1.Controls.Add(add_Customer);
             add_Customer.Show();
+          //  loadingData.LoadCustomers(dataGridView1);
         }
 
-        private void refreshBtn_Click(object sender, EventArgs e)
-        {
-            LoadCustomers();
-        }
-
-        private void usageBtn_Click(object sender, EventArgs e)
-        {
-            loadingData.LoadUsage(dataGridView1);
-        }
-
-        private void suspendBtn_Click(object sender, EventArgs e)
+        private void suspendToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -86,18 +151,34 @@ private void button3_Click(object sender, EventArgs e)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            LoadCustomers();
         }
 
-        private void paymentBtn_Click(object sender, EventArgs e)
+        private void historyUsageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            loadingData.LoadPayments(dataGridView1);
+            panel1.Controls.Clear();
+            loadingData.LoadUsage(dataGridView1);
 
         }
 
-        private void billingBtn_Click(object sender, EventArgs e)
+        private void billingToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            panel1.Controls.Clear();
             loadingData.LoadBilling(dataGridView1);
+            panel1.Controls.Add(processPayBtn);
+            processPayBtn.Visible = true;
+        }
 
+        private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            loadingData.LoadPayments(dataGridView1);
+        }
+
+        private void subscriptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            loadingData.LoadSubscriptions(dataGridView1);
         }
     }
 }

@@ -62,5 +62,17 @@ namespace ISP_Manager
             panel1.Controls.Add(dash);
             dash.Show();
         }
+
+        private void Tickets_Click(object sender, EventArgs e)
+        {
+            TicketsForm tickets = new TicketsForm();
+            tickets.TopLevel = false;
+            tickets.FormBorderStyle = FormBorderStyle.None;
+            tickets.Dock = DockStyle.Fill;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(tickets);
+            tickets.Show();
+
+        }
     }
 }

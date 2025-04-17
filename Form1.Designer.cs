@@ -89,6 +89,7 @@
             Tickets.TabIndex = 3;
             Tickets.Text = "Tickets";
             Tickets.UseVisualStyleBackColor = true;
+            Tickets.Click += Tickets_Click;
             // 
             // employeBtn
             // 

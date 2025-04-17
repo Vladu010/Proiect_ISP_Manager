@@ -122,7 +122,7 @@ namespace ISP_Manager
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "SELECT ticket_id, customer_id, issue_description, status, created_at FROM SupportTickets";
+                    string query = "SELECT * FROM  SupportTickets";
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataTable dataTable = new DataTable();
@@ -215,6 +215,26 @@ namespace ISP_Manager
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
                     dataGridView11.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public void LoadSubscriptions(DataGridView dataGridView12)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Subscriptions";
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView12.DataSource = dataTable;
                 }
             }
             catch (Exception ex)
